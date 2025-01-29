@@ -17,16 +17,21 @@
                   </div>
                 @end
 
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('login.attempt') }}">
                   {{ csrfField() }}
 
                   <div class="row mb-3">
                     <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
 
                     <div class="col-md-6">
-                      <input id="email" type="email" class="form-control " name="email" value="" required autocomplete="email"
-                        autofocus>
+                      <input id="email" type="email" class="form-control {{ flashMessages.has('errors.email') ? 'is-invalid' : '' }}"
+                      name="email" autocomplete="email" autofocus>
 
+                      @inputError('email')
+                        <div class="invalid-feedback">
+                          {{ $messages }}
+                        </div>
+                      @end
                     </div>
                   </div>
 
@@ -34,9 +39,14 @@
                     <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                     <div class="col-md-6">
-                      <input id="password" type="password" class="form-control " name="password" required
-                        autocomplete="current-password">
+                      <input id="password" type="password" class="form-control {{ flashMessages.has('errors.password') ? 'is-invalid' : '' }}"
+                      name="password">
 
+                        @inputError('password')
+                          <div class="invalid-feedback">
+                            {{ $messages }}
+                          </div>
+                        @end
                     </div>
                   </div>
 

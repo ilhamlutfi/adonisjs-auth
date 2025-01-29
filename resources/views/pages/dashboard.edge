@@ -9,6 +9,9 @@
 
         <div class="card-body">
             You are logged in!
+            @if(auth.isAuthenticated)
+              <p> Hello {{ auth.user.email }} </p>
+            @end
         </div>
       </div>
     </div>

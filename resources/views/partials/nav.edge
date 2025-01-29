@@ -18,13 +18,19 @@
       <!-- guest menu -->
       <ul class="navbar-nav ms-auto">
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('login') }}">Login</a>
-        </li>
+        @if(auth.isAuthenticated)
+          <li class="nav-item">
+            <a class="nav-link" href="">Logout</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('register') }}">Register</a>
-        </li>
+          @else
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login.show') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('register.show') }}">Register</a>
+          </li>
+        @endif
 
       </ul>
     </div>

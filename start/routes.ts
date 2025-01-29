@@ -10,12 +10,12 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import RegistersController from '#controllers/auth/registers_controller'
+import LoginController from '#controllers/auth/login_controller'
 
 router.on('/').render('pages/home')
 
-router.get('login', ({ view }) => {
-  return view.render('pages/auth/login')
-}).as('login')
+router.get('login', [LoginController, 'index']).as('login').use(middleware.guest())
+router.post('login', [LoginController, 'attempt']).as('login.attempt')
 
 router.get('register', [RegistersController, 'index']).as('register')
 router.post('register', [RegistersController, 'store']).as('register.store')
