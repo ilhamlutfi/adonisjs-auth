@@ -11,6 +11,12 @@
               <div class="card-header">Login</div>
 
               <div class="card-body">
+                @flashMessage('notification')
+                  <div class="alert alert-{{ $message.type }}">
+                    {{ $message.message }}
+                  </div>
+                @end
+
                 <form method="POST" action="">
                   {{ csrfField() }}
 

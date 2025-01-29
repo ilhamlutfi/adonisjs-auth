@@ -10,16 +10,29 @@
       <div class="card shadow-sm">
         <div class="card-header">Register</div>
 
+
         <div class="card-body">
-          <form method="POST" action="">
+          @flashMessage('notification')
+            <div class="alert alert-{{ $message.type }}">
+              {{ $message.message }}
+            </div>
+          @end
+
+          <form method="POST" action="{{ route('register.store') }}">
             {{ csrfField() }}
 
             <div class="row mb-3">
-              <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
+              <label for="full_name" class="col-md-4 col-form-label text-md-end">Full Name</label>
 
               <div class="col-md-6">
-                <input name="name" id="name" type="text" class="form-control"
-                  value="" required autocomplete="name" autofocus>
+                <input name="full_name" id="full_name" type="text" class="form-control {{ flashMessages.has('errors.full_name') ? 'is-invalid' : '' }}"
+                value="{{ old('full_name') || '' }}" autofocus>
+
+                 @inputError('full_name')
+                    <div class="invalid-feedback">
+                      {{ $messages }}
+                    </div>
+                  @end
               </div>
             </div>
 
@@ -27,8 +40,14 @@
               <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
 
               <div class="col-md-6">
-                <input name="email" id="email" type="email" class="form-control"
-                  value="" required autocomplete="email">
+                <input name="email" id="email" type="email" class="form-control {{ flashMessages.has('errors.email') ? 'is-invalid' : '' }}"
+                  value="{{ old('email') || ''}}" autocomplete="email">
+
+                  @inputError('email')
+                    <div class="invalid-feedback">
+                      {{ $messages }}
+                    </div>
+                  @end
               </div>
             </div>
 
@@ -36,18 +55,32 @@
               <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
               <div class="col-md-6">
-                <input id="password" type="password" class="form-control" name="password"
-                  required autocomplete="new-password">
+                <input id="password" type="password" class="form-control {{ flashMessages.has('errors.password') ? 'is-invalid' : '' }}"
+                name="password" autocomplete="new-password">
+
+                @inputError('password')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
               </div>
+
             </div>
 
             <div class="row mb-3">
               <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirm Password</label>
 
               <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
-                  autocomplete="new-password">
+                <input id="password-confirm" type="password" class="form-control {{ flashMessages.has('errors.password_confirmation') ? 'is-invalid' : '' }}"
+                name="password_confirmation" autocomplete="new-password">
+
+                @inputError('password_confirmation')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
               </div>
+
             </div>
 
             <div class="row mb-0">
