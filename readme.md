@@ -41,6 +41,17 @@ This step is optional but helpful for testing purposes. Running this command wil
 
 This account can be used for logging into the application during development or testing.
 
+## Setting Up Email (SMTP)
+
+To enable email functionality for features like password reset, you need to configure the following SMTP settings in your `.env` file:
+
+- **SMTP_HOST**: The SMTP server address (e.g., for Mailtrap, use `smtp.mailtrap.io`; for Gmail, use `smtp.gmail.com`).
+- **SMTP_PORT**: The port for the SMTP server (usually `587`, `2525` for TLS or `465` for SSL).
+- **SMTP_USERNAME**: Your SMTP username (e.g., Mailtrap username or your email address for Gmail).
+- **SMTP_PASSWORD**: Your SMTP password (e.g., Mailtrap password or your Gmail app-specific password).
+
+You can also use other email providers by checking their SMTP settings in their documentation.
+
 ### Start the development server:
 To start the development server, run:
 
@@ -58,6 +69,7 @@ The server will start on `http://localhost:3333`.
   - reset password
   - forgot password
   - logout
+- email notification
 - security rate limiting @adonisjs/limiter 
 
 ## Contributing
