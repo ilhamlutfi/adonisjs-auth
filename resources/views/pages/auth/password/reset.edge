@@ -9,15 +9,26 @@
 
         <div class="card-body">
 
-          <form method="POST" action="">
+          @flashMessage('notification')
+            <div class="alert alert-{{ $message.type }}">
+              {{ $message.message }}
+            </div>
+          @end
+
+          <form method="POST" action="{{ route('reset-password.request') }}">
             {{ csrfField() }}
             <div class="row mb-3">
               <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
 
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control " name="email" value="" required autocomplete="email"
-                  autofocus>
+                <input id="email" type="email" class="form-control {{ flashMessages.has('errors.email') ? 'is-invalid' : '' }}"
+                name="email" value="{{ old('email') || '' }}" autocomplete="email" autofocus>
 
+                @inputError('email')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
               </div>
             </div>
 
