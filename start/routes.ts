@@ -11,6 +11,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import RegistersController from '#controllers/auth/registers_controller'
 import LoginController from '#controllers/auth/login_controller'
+import LogoutsController from '#controllers/auth/logouts_controller'
 
 router.on('/').render('pages/home')
 
@@ -28,4 +29,6 @@ router.group(() => {
   router.get('dashboard', ({ view }) => {
     return view.render('pages/dashboard')
   }).as('dashboard')
+
+  router.post('logout', [LogoutsController, 'attempt']).as('logout')
 }).use(middleware.auth())
