@@ -16,7 +16,13 @@ export default class LoginController {
       const user = await User.verifyCredentials(data.email, data.password)
 
       // Step 3: Login user
-      await auth.use('web').login(user)
+      await auth.use('web').login(
+        user,
+        /**
+         * Generate token when "remember_me" input exists
+         */
+        !!request.input('remember_me')
+      )
 
       // Step 4: Send them to a protected route
       return response.redirect().toRoute('dashboard')
