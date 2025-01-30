@@ -21,6 +21,27 @@ npm install
 
 ## Usage
 
+### Run Database Migrations:
+Before using the application, you need to run the **create a database** and run migrations to set up the required tables:
+
+```bash
+node ace migration:run
+```
+
+### Seed the Database (Optional):
+If you want to seed some initial data into the database (e.g., for testing), you can run:
+
+```bash
+node ace db:seed
+```
+This step is optional but helpful for testing purposes. Running this command will generate a default user account with the following credentials:
+
+    - Email: user@example.com
+    - Password: password (hashed)
+
+This account can be used for logging into the application during development or testing.
+
+### Start the development server:
 To start the development server, run:
 
 ```bash
