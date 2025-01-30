@@ -15,7 +15,7 @@
             </div>
           @end
 
-          <form method="POST" action="{{ route('reset-password.request') }}">
+          <form method="POST" action="{{ route('reset-password.attempt') }}">
             {{ csrfField() }}
             <div class="row mb-3">
               <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>

@@ -1,0 +1,81 @@
+@layout.app({ title: 'Forgot Password' })
+
+@slot('main')
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header">Forgot Password</div>
+
+        <div class="card-body">
+
+          @flashMessage('notification')
+          <div class="alert alert-{{ $message.type }}">
+            {{ $message.message }}
+          </div>
+          @end
+
+          <form method="POST" action="{{ route('forgot-password.attempt') }}">
+            {{ csrfField() }}
+            <input type="hidden" name="token" value="{{ tokenValue }}">
+
+            <div class="row mb-3">
+              <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>
+
+              <div class="col-md-6">
+                <input id="email" type="email"
+                  class="form-control"
+                  name="email" value="{{ user.email }}" autocomplete="email" autofocus readonly>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
+
+              <div class="col-md-6">
+                <input id="password" type="password"
+                  class="form-control {{ flashMessages.has('errors.password') ? 'is-invalid' : '' }}" name="password"
+                  autocomplete="new-password">
+
+                @inputError('password')
+                <div class="invalid-feedback">
+                  {{ $messages }}
+                </div>
+                @end
+              </div>
+
+            </div>
+
+            <div class="row mb-3">
+              <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirm Password</label>
+
+              <div class="col-md-6">
+                <input id="password-confirm" type="password"
+                  class="form-control {{ flashMessages.has('errors.password_confirmation') ? 'is-invalid' : '' }}"
+                  name="password_confirmation" autocomplete="new-password">
+
+                @inputError('password_confirmation')
+                <div class="invalid-feedback">
+                  {{ $messages }}
+                </div>
+                @end
+              </div>
+
+            </div>
+
+            <div class="row mb-0">
+              <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                  Reset Password
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endslot
+
+@end

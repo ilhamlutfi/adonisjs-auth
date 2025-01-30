@@ -10,7 +10,7 @@ export default class ResetPasswordsController {
     return view.render('pages/auth/password/reset')
   }
 
-  async request({ request, response, session }: HttpContext) {
+  async attempt({ request, response, session }: HttpContext) {
     const data = await request.validateUsing(UserResetPassword)
 
     // check email is exist
