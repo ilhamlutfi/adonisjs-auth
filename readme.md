@@ -14,7 +14,7 @@ Welcome to the AdonisJS Auth Project! This project is a boilerplate to help you 
 To get started, clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/adonis-auth.git
+git clone https://github.com/ilhamlutfi/adonisjs-auth.git
 cd adonis-auth
 npm install
 ```
@@ -68,8 +68,9 @@ The server will start on `http://localhost:3333`.
   - register
   - reset password
   - forgot password
+  - remember me
   - logout
-- email notification
+- email notification @adonisjs/mail
 - security rate limiting @adonisjs/limiter 
 
 ## Contributing
