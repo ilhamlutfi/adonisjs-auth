@@ -15,6 +15,7 @@ import LogoutsController from '#controllers/auth/logouts_controller'
 import ResetPasswordsController from '#controllers/auth/reset_passwords_controller'
 import ForgotPasswordsController from '#controllers/auth/forgot_passwords_controller'
 import { throttle } from '#start/limiter'
+import BooksController from '#controllers/books_controller'
 
 router.on('/').render('pages/home')
 
@@ -34,6 +35,8 @@ router.group(() => {
   router.get('dashboard', ({ view }) => {
     return view.render('pages/dashboard')
   }).as('dashboard')
+
+  router.resource('books', BooksController).as('books')
 
   router.post('logout', [LogoutsController, 'attempt']).as('logout')
 }).use(middleware.auth())

@@ -1,0 +1,63 @@
+@layout.app({ title: 'Books' })
+  @slot('main')
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card shadow-sm">
+          <div class="card-header">Books</div>
+
+          <div class="card-body">
+            <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Create</a>
+
+            <div class="float-end">
+              <form action="{{ route('books.index') }}" method="GET">
+                <div class="input-group">
+                  <input type="text" name="search" class="form-control" placeholder="Search" value="{{ request.input('search') ?? '' }}">
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+              </form>
+            </div>
+
+              <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Title</th>
+                      <th>Slug</th>
+                      <th>Author</th>
+                      <th>Published At</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    @each((book, index) in books)
+                      <tr>
+                        <td>{{ (books.currentPage - 1) * books.perPage + (index + 1) }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.slug }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.publishedAt }}</td>
+                        <td class="text-center" width="15%">
+                            <a href="" class="btn btn-success">Edit</a>
+                            <a href="" class="btn btn-danger">Delete</a>
+                        </td>
+                      </tr>
+                    @end
+                  </tbody>
+              </table>
+
+              {{--  include pagination  --}}
+              @if(books.hasPages)
+                @!component('components/pagination', {
+                  pagination: books,
+                  baseUrl: route('books.index')
+                })
+              @endif
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endslot
+@end

@@ -1,0 +1,27 @@
+<div class="px-0 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+  <div class="fw-normal small mt-4 mt-lg-0">
+    Showing <b>{{ pagination.total < pagination.perPage ? pagination.total : pagination.perPage }}</b> out of <b>{{ pagination.total }}</b> entries
+  </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination mb-0">
+      <li class="page-item">
+        <a class="page-link" href="{{ baseUrl }}/?page={{ pagination.firstPage }}">First</a>
+      </li>
+
+      <li class="page-item {{ pagination.getPreviousPageUrl() == null ? 'disabled' : '' }}">
+        <a class="page-link"
+          href="{{ baseUrl }}{{ pagination.getPreviousPageUrl() == null ? '' : pagination.getPreviousPageUrl() }}">
+          << </a>
+      </li>
+
+      <li class="page-item {{ pagination.getNextPageUrl() == null ? 'disabled' : '' }}">
+        <a class="page-link" href="{{ baseUrl }}{{ pagination.getNextPageUrl() }}">>></a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="{{ baseUrl }}/?page={{ pagination.lastPage }}">Last</a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -12,12 +12,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- login menu -->
       <ul class="navbar-nav me-auto">
-
+        @if(auth.isAuthenticated)
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('books.index') }}">Books</a>
+          </li>
+        @endif
       </ul>
 
       <!-- guest menu -->
       <ul class="navbar-nav ms-auto">
-
         @if(auth.isAuthenticated)
           <form method="POST" action="{{ route('logout') }}">
             {{ csrfField() }}
