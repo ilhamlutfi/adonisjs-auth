@@ -7,6 +7,12 @@
           <div class="card-header">Books</div>
 
           <div class="card-body">
+            @flashMessage('notification')
+            <div class="alert alert-{{ $message.type }}">
+              {{ $message.message }}
+            </div>
+            @end
+
             <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Create</a>
 
             <div class="float-end">
@@ -23,7 +29,6 @@
                     <tr>
                       <th>No</th>
                       <th>Title</th>
-                      <th>Slug</th>
                       <th>Author</th>
                       <th>Published At</th>
                       <th>Action</th>
@@ -35,12 +40,23 @@
                       <tr>
                         <td>{{ (books.currentPage - 1) * books.perPage + (index + 1) }}</td>
                         <td>{{ book.title }}</td>
-                        <td>{{ book.slug }}</td>
                         <td>{{ book.author }}</td>
-                        <td>{{ book.publishedAt }}</td>
+                        <td>{{ book.published_at }}</td>
                         <td class="text-center" width="15%">
-                            <a href="" class="btn btn-success">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                          <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Action
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                              <li><a class="dropdown-item" href="{{ route('books.show', {id: book.id}) }}">Show</a></li>
+                              <li><a class="dropdown-item" href="{{ route('books.edit', {id: book.id}) }}">Edit</a></li>
+                              <li><a class="dropdown-item" href="javascript:void(0)" onclick="if (confirm('Delete book with id: {{ book.id }}')) { document.getElementById('delete-form-{{ book.id }}').submit() }">Delete</a></li>
+                            </ul>
+                          </div>
+
+                          <form action="{{ route('books.destroy', {id: book.id}) }}?_method=DELETE" id="delete-form-{{ book.id }}" method="POST">
+                            {{ csrfField() }}
+                          </form>
                         </td>
                       </tr>
                     @end

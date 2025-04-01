@@ -1,0 +1,43 @@
+@layout.app({ title: 'Detail Book' })
+@slot('main')
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-sm">
+        <div class="card-header">Detail Book</div>
+
+        <div class="card-body">
+          <table class="table">
+            <tr>
+              <th>Title</th>
+              <td>{{ book.title }}</td>
+            </tr>
+            <tr>
+              <th>Slug</th>
+              <td>{{ book.slug }}</td>
+            </tr>
+            <tr>
+              <th>Author</th>
+              <td>{{ book.author }}</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>{{ book.description }}</td>
+            </tr>
+            <tr>
+              <th>Published At</th>
+              <td>{{ book.published_at }}</td>
+            </tr>
+          </table>
+
+          <div class="d-flex justify-content-end">
+            <a href="{{ route('books.index') }}" class="btn btn-secondary mb-3">Back</a>
+            <a href="{{ route('books.edit', {id: book.id}) }}" class="btn btn-success ms-1 mb-3">Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endslot
+@end

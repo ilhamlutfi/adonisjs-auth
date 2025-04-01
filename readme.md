@@ -72,6 +72,7 @@ The server will start on `http://localhost:3333`.
   - logout
 - email notification @adonisjs/mail
 - security rate limiting @adonisjs/limiter 
+- CRUD Books + Pagination & Search (UPDATED)
 
 ## Contributing
 

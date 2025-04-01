@@ -1,0 +1,78 @@
+@layout.app({ title: 'Create Book' })
+  @slot('main')
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card shadow-sm">
+          <div class="card-header">Create Book</div>
+
+          <div class="card-body">
+
+            @flashMessage('notification')
+              <div class="alert alert-{{ $message.type }}">
+                {{ $message.message }}
+              </div>
+            @end
+
+            <form action="{{ route('books.store') }}" method="post">
+              {{ csrfField() }}
+
+              <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Title</label>
+                <input type="text" name="title" id="title" class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}"
+                value="{{ old('title') || '' }}">
+
+                @inputError('title')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
+              </div>
+
+              <div class="mb-3">
+                <label for="author" class="form-label fw-bold">Author</label>
+                <input type="text" name="author" id="author" class="form-control {{ flashMessages.has('errors.author') ? 'is-invalid' : '' }}"
+                value="{{ old('author') || '' }}">
+
+                @inputError('author')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label fw-bold">Description</label>
+                <textarea name="description" id="description" rows="5" class="form-control {{ flashMessages.has('errors.description') ? 'is-invalid' : '' }}">{{ old('description') || '' }}</textarea>
+
+                  @inputError('description')
+                    <div class="invalid-feedback">
+                      {{ $messages }}
+                    </div>
+                  @end
+              </div>
+
+              <div class="mb-3">
+                <label for="published_at" class="form-label fw-bold">Published At</label>
+                <input type="date" name="published_at" id="published_at" class="form-control {{ flashMessages.has('errors.published_at') ? 'is-invalid' : '' }}"
+                value="{{ old('published_at') || '' }}">
+
+                @inputError('published_at')
+                  <div class="invalid-feedback">
+                    {{ $messages }}
+                  </div>
+                @end
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <a href="{{ route('books.index') }}" class="btn btn-secondary mb-3">Back</a>
+                <button type="submit" class="btn btn-primary mb-3 ms-1">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endslot
+@end
